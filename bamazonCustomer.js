@@ -62,6 +62,7 @@ var quantity = function(itemName) {
         }
     ])
     .then(function(inquirerResponse2) {
+        console.log(inquirerResponse2);
         var userQuantity = parseInt(inquirerResponse2.quantity);
         var stockQuantity = parseInt(itemName[0].stock_quantity);
         if (userQuantity < stockQuantity && stockQuantity >= 1) {
@@ -97,9 +98,10 @@ function purchase() {
         }
     ])
     .then(function(inquirerResponse3) {
+        console.log(inquirerResponse3);
         if (inquirerResponse3 !== false) {
             console.log("Awesome! We added your purchase to your cart. Here's our options to keep shopping");
-            quantity(resultFromInquirer);
+            quantity(inquirerResponse3);
             itemList();
         } else {
             console.log("Change of heart? It happens. Let's start over");
