@@ -25,7 +25,6 @@ function itemList() {
         console.log(chalk.bgBlack.red("------------------------------------"));
         start();
     });
-    
 }
 
 var start = function() {
@@ -43,17 +42,14 @@ var start = function() {
          connection.query("SELECT * FROM products WHERE id=?", [inquirerResponse.itemId], function(err, res) {
              quantity(res);
          });
-         
      } else {
          console.log("This is not a valid ItemId");
          start();
      }
-
     }); 
 };
 
 var quantity = function(itemName) {
-    console.log(itemName);
     inquirer.prompt([
         {
         name: "quantity",
@@ -62,17 +58,16 @@ var quantity = function(itemName) {
         }
     ])
     .then(function(inquirerResponse2) {
-        console.log(inquirerResponse2);
         var userQuantity = parseInt(inquirerResponse2.quantity);
         var stockQuantity = parseInt(itemName[0].stock_quantity);
         if (userQuantity < stockQuantity && stockQuantity >= 1) {
             var query = connection.query("UPDATE products SET ? WHERE ?", 
             [
                 {
-                    product_name: itemName[0].product_name 
+                stock_quantity: (stockQuantity - userQuantity) 
                 },
                 {
-                stock_quantity: (stockQuantity - userQuantity)
+                product_name: itemName[0].product_name
                 }
             ],
             function(err, res) {
@@ -84,7 +79,6 @@ var quantity = function(itemName) {
             console.log("Ouch! We're not able to fill your order. We currently have " + stockQuantity + " avaiable for purchase. Check out our stock again");
             start();
         }
-        // purchase();
     });
 };
 
@@ -98,15 +92,12 @@ function purchase() {
         }
     ])
     .then(function(inquirerResponse3) {
-        console.log(inquirerResponse3);
         if (inquirerResponse3 !== false) {
             console.log("Awesome! We added your purchase to your cart. Here's our options to keep shopping");
-            quantity(inquirerResponse3);
             itemList();
         } else {
             console.log("Change of heart? It happens. Let's start over");
             itemList();
-        }
+        } 
     });
 }
-
