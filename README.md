@@ -6,6 +6,6 @@ After you install the npm packages locally and set up an set up an sql database 
 
 ![Screenshot1](/Images/ScreenShot1.png)
 
-![Image of Screenshot1]
-(/image/ScreenShot1.png)
+
+
 
