@@ -95,7 +95,7 @@ function purchase() {
         if (inquirerResponse3 !== false) {
             console.log("Awesome! We added your purchase to your cart. Here's our options to keep shopping");
             itemList();
-        } else {
+        } else { 
             console.log("Change of heart? It happens. Let's start over");
             itemList();
         } 
